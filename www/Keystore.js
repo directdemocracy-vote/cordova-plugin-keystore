@@ -1,5 +1,7 @@
-export default class KeyStore {
-    constructor(name) {
+/*global cordova, module*/
+
+module.exports = {
+    greet: function (name, successCallback, errorCallback) {
         cordova.exec(successCallback, errorCallback, "Hello", "greet", [name]);
     }
-}
+};
