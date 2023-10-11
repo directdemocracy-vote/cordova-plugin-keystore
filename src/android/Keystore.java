@@ -1,4 +1,4 @@
-package app.directdemocraty.plugin;
+package com.example.plugin;
 
 import org.apache.cordova.*;
 import org.json.JSONArray;
@@ -8,6 +8,7 @@ public class KeyStore extends CordovaPlugin {
 
     @Override
     public boolean execute(String action, JSONArray data, CallbackContext callbackContext) throws JSONException {
+
         if (action.equals("greet")) {
 
             String name = data.getString(0);
@@ -22,4 +23,3 @@ public class KeyStore extends CordovaPlugin {
 
         }
     }
-}
