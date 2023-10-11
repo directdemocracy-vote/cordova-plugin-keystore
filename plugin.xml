@@ -6,23 +6,23 @@
     <engines>
         <engine name="cordova" version=">=12.0.0" />
     </engines>
-    <name>Cordova keystore</name>
+    <name>Cordova KeyStore</name>
     <description>A cordova plugin to create, store and sign private key</description>
     <author>Benjamin Délèze</author>
     <keywords>keystore</keywords>
     <license>Apache 2.0 License</license>
     <js-module name="KeyStore" src="www/KeyStore.js">
-        <clobbers target="cordova.plugins.KeyStore" />
+        <clobbers target="KeyStore" />
     </js-module>
     
     <platform name="android">
         <config-file target="res/xml/config.xml" parent="/*">
-        <feature name="Keystore">
+        <feature name="KeyStore">
             <param name="android-package" value="app.directdemocraty.plugin.Keystore"/>
         </feature>
         </config-file>
 
-        <source-file src="src/android/Keystore.java" target-dir="src/app/directdemocraty/plugin/"/>
+        <source-file src="src/android/KeyStore.java" target-dir="src/app/directdemocraty/plugin/"/>
     </platform>
 
 </plugin>
