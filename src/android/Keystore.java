@@ -23,3 +23,4 @@ public class KeyStore extends CordovaPlugin {
 
         }
     }
+}
