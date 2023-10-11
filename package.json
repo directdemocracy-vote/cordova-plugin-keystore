@@ -1,0 +1,32 @@
+{
+  "name": "cordova-plugin-keystore",
+  "version": "0.1.0",
+  "description": "A cordova plugin to create, store and sign private key",
+  "cordova": {
+    "id": "cordova-plugin-keystore",
+    "platforms": [
+      "android"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/directdemocracy-vote/cordova-plugin-keystore.git"
+  },
+  "keywords": [
+    "keystore",
+    "ecosystem:cordova",
+    "cordova-android"
+  ],
+  "engines": [
+    {
+      "name": "cordova",
+      "version": ">=12.0.0"
+    }
+  ],
+  "author": "Benjamin Délèze",
+  "license": "Apache 2.0 License",
+  "bugs": {
+    "url": "https://github.com/directdemocracy-vote/cordova-plugin-keystore/issues"
+  },
+  "homepage": "https://github.com/directdemocracy-vote/cordova-plugin-keystore#readme"
+}
