@@ -1,4 +1,4 @@
-package vote.directdemocrac.plugin;
+package vote.directdemocracy.plugin;
 
 import org.apache.cordova.*;
 import org.json.JSONArray;
