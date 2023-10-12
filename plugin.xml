@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
-        id="vote.directdemocracy.keystore"
+        id="vote.directdemocracy.ddkeystore"
         version="0.7.0">
 
-  <name>KeyStore</name>
+  <name>DdKeyStore</name>
 
   <engines>
     <engine name="cordova" version=">=3.4.0"/>
   </engines>
 
-  <asset src="www/KeyStore.js" target="js/KeyStore.js"/>
+  <asset src="www/DdKeyStore.js" target="js/DdKeyStore.js"/>
 
-  <js-module src="www/KeyStore.js" name="keystore">
-    <clobbers target="KeyStore" />
+  <js-module src="www/DdKeyStore.js" name="ddkeystore">
+    <clobbers target="DdKeyStore" />
   </js-module>
 
   <platform name="android">
 
     <config-file target="res/xml/config.xml" parent="/*">
-      <feature name="KeyStore">
-        <param name="android-package" value="vote.directdemocracy.plugin.KeyStore"/>
+      <feature name="DdKeyStore">
+        <param name="android-package" value="vote.directdemocracy.plugin.DdKeyStore"/>
       </feature>
     </config-file>
 
-    <source-file src="src/android/KeyStore.java" target-dir="src/com/example/plugin/"/>
+    <source-file src="src/android/DdKeyStore.java" target-dir="src/com/example/plugin/"/>
   </platform>
 </plugin>

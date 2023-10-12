@@ -1,16 +1,16 @@
 {
-  "name": "cordova-plugin-keystore",
+  "name": "cordova-plugin-ddkeystore",
   "version": "0.1.0",
   "description": "A sample for a new cordova plugin",
   "cordova": {
-    "id": "cordova-plugin-keystore",
+    "id": "cordova-plugin-ddkeystore",
     "platforms": [
       "android"
     ]
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/directdemocracy-vote/cordova-plugin-keystore.git"
+    "url": "git+https://github.com/directdemocracy-vote/cordova-plugin-ddkeystore.git"
   },
   "keywords": [
     "cordova",
