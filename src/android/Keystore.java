@@ -1,4 +1,4 @@
-package com.example.plugin;
+package vote.directdemocrac.plugin;
 
 import org.apache.cordova.*;
 import org.json.JSONArray;
@@ -18,7 +18,7 @@ public class KeyStore extends CordovaPlugin {
             return true;
 
         } else {
-            
+
             return false;
 
         }

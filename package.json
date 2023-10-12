@@ -1,28 +1,28 @@
 {
-  "name": "cordova-plugin-hello",
+  "name": "cordova-plugin-keystore",
   "version": "0.1.0",
   "description": "A sample for a new cordova plugin",
   "cordova": {
-    "id": "cordova-plugin-hello",
+    "id": "cordova-plugin-keystore",
     "platforms": [
       "android"
     ]
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/don/cordova-plugin-hello.git"
+    "url": "git+https://github.com/directdemocracy-vote/cordova-plugin-keystore.git"
   },
   "keywords": [
     "cordova",
     "plugin",
-    "hello",
+    "keystore",
     "ecosystem:cordova",
     "cordova-android"
   ],
   "author": "Don Coleman",
   "license": "Apache-2",
   "bugs": {
-    "url": "https://github.com/don/cordova-plugin-hello/issues"
+    "url": "https://github.com/directdemocracy-vote/cordova-plugin-keystore/issues"
   },
-  "homepage": "https://github.com/don/cordova-plugin-hello#readme"
+  "homepage": "https://github.com/directdemocracy-vote/cordova-plugin-keystore#readme"
 }

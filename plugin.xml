@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
-        id="com.example.hello"
+        id="vote.directdemocracy-vote.keystore"
         version="0.7.0">
 
   <name>KeyStore</name>
@@ -11,7 +11,7 @@
 
   <asset src="www/KeyStore.js" target="js/KeyStore.js"/>
 
-  <js-module src="www/KeyStore.js" name="hello">
+  <js-module src="www/KeyStore.js" name="KeyStore">
     <clobbers target="KeyStore" />
   </js-module>
 
