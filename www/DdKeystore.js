@@ -2,12 +2,15 @@
 
 module.exports = {
     greet: function (name, successCallback, errorCallback) {
-        cordova.exec(successCallback, errorCallback, "DdKeyStore", "greet", [name]);
+      cordova.exec(successCallback, errorCallback, "DdKeyStore", "greet", [name]);
     },
-    createKeyPair: function(successCallback, errorCallback) {
-      cordova.exec(successCallback, errorCallback, "DdKeyStore", "createKeyPair");
+    createKeyPair: function(alias, successCallback, errorCallback) {
+      cordova.exec(successCallback, errorCallback, "DdKeyStore", "createKeyPair", [alias]);
     },
-    sign: function(message, successCallback, errorCallback) {
-      cordova.exec(successCallback, errorCallback, "DdKeyStore", "sign", [message]);
+    sign: function(alias, message, successCallback, errorCallback) {
+      cordova.exec(successCallback, errorCallback, "DdKeyStore", "sign", [alias, message]);
+    },
+    verify: function(alias, message, signature, successCallback, errorCallback) {
+      cordova.exec(successCallback, errorCallback, "DdKeyStore", "verify", [alias, message, signature]);
     }
 };
