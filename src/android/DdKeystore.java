@@ -12,6 +12,7 @@ import java.security.Signature;
 import java.security.KeyStore;
 import java.security.KeyStore.Entry;
 import java.security.KeyStore.PrivateKeyEntry;
+import java.security.PrivateKey;
 import java.util.Calendar;
 
 import android.security.keystore.KeyProperties;
@@ -20,22 +21,30 @@ import android.security.keystore.KeyGenParameterSpec;
 public class DdKeyStore extends CordovaPlugin {
 
     @Override
-    public boolean execute(String action, JSONArray data, CallbackContext callbackContext) throws JSONException; {
+    public boolean execute(String action, JSONArray data, CallbackContext callbackContext) throws JSONException {
 
         if (action.equals("greet")) {
-
             String name = data.getString(0);
             String message = "Hello, " + name;
             callbackContext.success(message);
 
             return true;
-
-        } else if (action.equals("createKeyPair")){
-          return createKeyPair();
-        } else {
-
+        } else if (action.equals("createKeyPair")) {
+          try {
+            return createKeyPair();
+          } catch (Exception e) {
             return false;
-
+          }
+        } else if (action.equals("sign")) {
+          try {
+            String name = data.getString(0);
+            return sign(name, callbackContext);
+          } catch (Exception e) {
+            callbackContext.success(e.toString());
+            return false;
+          }
+        } else {
+            return false;
         }
     }
 
@@ -47,8 +56,10 @@ public class DdKeyStore extends CordovaPlugin {
       if (!(entry instanceof PrivateKeyEntry)) {
           return false;
       }
-      Signature s = Signature.getInstance("SHA256withECDSA");
-      s.initSign(((PrivateKeyEntry) entry).getPrivateKey());
+
+      PrivateKey key = ((PrivateKeyEntry) entry).getPrivateKey();
+      Signature s = Signature.getInstance("SHA512withRSA");
+      s.initSign(key);
       s.update(messageBytes);
       byte[] signature = s.sign();
       callbackContext.success(new String(signature, "UTF-8"));
@@ -65,6 +76,7 @@ public class DdKeyStore extends CordovaPlugin {
               KeyProperties.PURPOSE_SIGN | KeyProperties.PURPOSE_VERIFY)
               .setDigests(KeyProperties.DIGEST_SHA512)
               .setKeyValidityStart(start.getTime())
+              .setSignaturePaddings(KeyProperties.SIGNATURE_PADDING_RSA_PKCS1)
               .build();
 
       kpg.initialize(spec);
