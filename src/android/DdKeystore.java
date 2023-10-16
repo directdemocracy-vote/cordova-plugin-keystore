@@ -58,7 +58,7 @@ public class DdKeyStore extends CordovaPlugin {
       }
 
       PrivateKey key = ((PrivateKeyEntry) entry).getPrivateKey();
-      Signature s = Signature.getInstance("SHA512withRSA");
+      Signature s = Signature.getInstance("SHA256withRSA");
       s.initSign(key);
       s.update(messageBytes);
       byte[] signature = s.sign();
@@ -74,7 +74,7 @@ public class DdKeyStore extends CordovaPlugin {
       KeyGenParameterSpec spec = new KeyGenParameterSpec.Builder(
               "directdemocracyAppKey",
               KeyProperties.PURPOSE_SIGN | KeyProperties.PURPOSE_VERIFY)
-              .setDigests(KeyProperties.DIGEST_SHA512)
+              .setDigests(KeyProperties.DIGEST_SHA256)
               .setKeyValidityStart(start.getTime())
               .setSignaturePaddings(KeyProperties.SIGNATURE_PADDING_RSA_PKCS1)
               .build();
