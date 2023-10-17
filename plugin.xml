@@ -25,4 +25,17 @@
 
     <source-file src="src/android/DdKeyStore.java" target-dir="src/com/example/plugin/"/>
   </platform>
+
+  <platform name="browser">
+  <config-file target="res/xml/config.xml" parent="/*">
+    <feature name="DdKeyStore">
+      <param name="browser-package" value="vote.directdemocracy.plugin.DdKeyStore" />
+    </feature>
+  </config-file>
+
+  <js-module src="src/browser/DdKeyStore.js"
+             name="DdKeyStore">
+    <runs />
+  </js-module>
+</platform>
 </plugin>
