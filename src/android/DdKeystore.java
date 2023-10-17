@@ -70,8 +70,8 @@ public class DdKeyStore extends CordovaPlugin {
       s.initSign(key);
       s.update(message);
       byte[] signature = s.sign();
-      
-      callbackContext.success(signature);
+
+      callbackContext.success(Base64.getEncoder().encodeToString(signature));
       return true;
     }
 
@@ -106,7 +106,7 @@ public class DdKeyStore extends CordovaPlugin {
 
       kpg.initialize(spec);
 
-      callbackContext.success(kpg.generateKeyPair().getPublic().getEncoded().toString());
+      callbackContext.success(Base64.getEncoder().encodeToString(kpg.generateKeyPair().getPublic().getEncoded()));
       return true;
     }
 }
