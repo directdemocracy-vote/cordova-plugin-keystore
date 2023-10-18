@@ -100,6 +100,7 @@ public class DdKeyStore extends CordovaPlugin {
               alias,
               KeyProperties.PURPOSE_SIGN | KeyProperties.PURPOSE_VERIFY)
               .setDigests(KeyProperties.DIGEST_SHA256)
+              .setKeySize(2048)
               .setCertificateNotBefore (start.getTime())
               .setSignaturePaddings(KeyProperties.SIGNATURE_PADDING_RSA_PKCS1)
               .build();
