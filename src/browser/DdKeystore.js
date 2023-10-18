@@ -35,8 +35,8 @@ async function sign(success, error, args) {
 }
 
 module.exports = {
-  createKeyPair: function (succes, error, opts) {
-    success("test browser")
+  createKeyPair: function (success, error, opts) {
+    success("test browser");
   }
 };
 require('cordova/exec/proxy').add('DdKeyStore', module.exports);

@@ -27,7 +27,7 @@
   </platform>
 
   <platform name="browser">
-  <config-file target="res/xml/config.xml" parent="/*">
+  <config-file target="config.xml" parent="/*">
     <feature name="DdKeyStore">
       <param name="browser-package" value="vote.directdemocracy.plugin.DdKeyStore" />
     </feature>
