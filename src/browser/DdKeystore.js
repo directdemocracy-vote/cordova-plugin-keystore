@@ -11,34 +11,50 @@ async function createKeyPair(success, error, args) {
   )
   const publicKey = await exportCryptoKey(keyPair.publicKey, 'public');
   const privateKey = await exportCryptoKey(keyPair.privateKey, 'private');
-  console.log(privateKey)
   localStorage.setItem('privateKey', privateKey);
   success(publicKey);
 }
 
 async function exportCryptoKey(key, type) {
-  const format = type === 'public' ? 'spki' : 'pkcs8';
+  const format = type === 'public' ? 'spki' : 'jwk';
   let exported = await window.crypto.subtle.exportKey(format, key);
-  if (type === 'public') {
-    exported = new Uint8Array(exported);
-    btoa(String.fromCharCode(...exported));
-  }
-  
+  if (type === 'public')
+    exported = arraryBufferToBase64(exported);
+  else
+    exported = JSON.stringify(exported) 
+
   return exported
+}
+
+function arraryBufferToBase64(arrayBuffer) {
+  let result = new Uint8Array(arrayBuffer);
+  result = btoa(String.fromCharCode(...result));
+
+  return result;
 }
 
 async function sign(success, error, args) {
   const encoder = new TextEncoder();
   const encoded = encoder.encode(args[1]); // args[0] is the alias of the key
-  localStorage.getItem('privateKey')
+  let privatekey = JSON.parse(localStorage.getItem('privateKey'));
+
+  const privateCryptoKey = await window.crypto.subtle.importKey(
+    "jwk",
+    privatekey,
+    {
+      name: "RSASSA-PKCS1-v1_5",
+      hash: "SHA-256",
+    },
+    true,
+    ["sign"],
+  );
   signature = await window.crypto.subtle.sign(
     "RSASSA-PKCS1-v1_5",
-    localStorage.getItem('privateKey'),
+    privateCryptoKey,
     encoded,
   );
-  console.log(signature)
 
-  success(signature)
+  success(arraryBufferToBase64(signature));
 }
 
 module.exports = {
