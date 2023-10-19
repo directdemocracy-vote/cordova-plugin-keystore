@@ -27,15 +27,25 @@
   </platform>
 
   <platform name="browser">
-  <config-file target="config.xml" parent="/*">
-    <feature name="DdKeyStore">
-      <param name="browser-package" value="vote.directdemocracy.plugin.DdKeyStore" />
-    </feature>
-  </config-file>
+    <config-file target="config.xml" parent="/*">
+      <feature name="DdKeyStore">
+        <param name="browser-package" value="vote.directdemocracy.plugin.DdKeyStore" />
+      </feature>
+    </config-file>
 
-  <js-module src="src/browser/DdKeyStore.js"
-             name="DdKeyStore">
-    <runs />
-  </js-module>
-</platform>
+    <js-module src="src/browser/DdKeyStore.js"
+               name="DdKeyStore">
+      <runs />
+    </js-module>
+  </platform>
+
+  <platform name="iOS">
+    <config-file target="config.xml" parent="/*">
+      <feature name="DdKeyStore">
+        <param name="iso-package" value="vote.directdemocracy.plugin.DdKeyStore" />
+      </feature>
+    </config-file>
+    <source-file src="src/ios/DdKeyStore.m" />
+    <header-file src="src/ios/DdKeyStore.h" />
+  </platform>
 </plugin>
