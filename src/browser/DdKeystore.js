@@ -8,7 +8,7 @@ async function createKeyPair(success, error, args) {
     },
     true,
     ["sign", "verify"]
-  )
+  );
   const publicKey = await exportCryptoKey(keyPair.publicKey, 'public');
   const privateKey = await exportCryptoKey(keyPair.privateKey, 'private');
   localStorage.setItem('privateKey', privateKey);
@@ -21,7 +21,7 @@ async function exportCryptoKey(key, type) {
   if (type === 'public')
     exported = arraryBufferToBase64(exported);
   else
-    exported = JSON.stringify(exported) 
+    exported = JSON.stringify(exported);
 
   return exported
 }
