@@ -18,7 +18,7 @@ Edit `www/js/index.js` and add the following code inside `onDeviceReady`
         alert("Error calling Hello Plugin");
     }
 
-    DdKeyStore.greet("World", success, failure);
+    Keystore.greet("World", success, failure);
 ```
 
 Install iOS or Android platform

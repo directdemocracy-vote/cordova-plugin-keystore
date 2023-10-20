@@ -19,7 +19,7 @@ import java.util.Base64;
 import android.security.keystore.KeyProperties;
 import android.security.keystore.KeyGenParameterSpec;
 
-public class DdKeyStore extends CordovaPlugin {
+public class Keystore extends CordovaPlugin {
 
     @Override
     public boolean execute(String action, JSONArray data, CallbackContext callbackContext) throws JSONException {

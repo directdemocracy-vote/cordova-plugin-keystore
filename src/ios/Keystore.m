@@ -1,7 +1,7 @@
-#import "DdKeystore.h"
+#import "Keystore.h"
 #import <Cordova/CDVPlugin.h>
 
-@implementation DdKeyStore
+@implementation Keystore
 
 - (void)createKeyPair:(CDVInvokedUrlCommand*)command {
 
