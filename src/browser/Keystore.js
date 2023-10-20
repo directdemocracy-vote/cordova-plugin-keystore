@@ -37,7 +37,6 @@ async function sign(success, error, args) {
   const encoder = new TextEncoder();
   const encoded = encoder.encode(args[1]); // args[0] is the alias of the key
   let privatekey = JSON.parse(localStorage.getItem('privateKey'));
-
   const privateCryptoKey = await window.crypto.subtle.importKey(
     "jwk",
     privatekey,

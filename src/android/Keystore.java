@@ -19,6 +19,7 @@ import java.util.Base64;
 import android.security.keystore.KeyProperties;
 import android.security.keystore.KeyGenParameterSpec;
 
+// The classe is Keystore and not KeyStore to not conflicts with the java import java.security.KeyStore
 public class Keystore extends CordovaPlugin {
 
     @Override
