@@ -25,12 +25,7 @@ public class Keystore extends CordovaPlugin {
     @Override
     public boolean execute(String action, JSONArray data, CallbackContext callbackContext) throws JSONException {
         String alias = data.getString(0);
-        if (action.equals("greet")) {
-          String message = "Hello " + alias;
-          callbackContext.success(message);
-
-          return true;
-        } else if (action.equals("createKeyPair")) {
+        if (action.equals("createKeyPair")) {
           try {
             return createKeyPair(alias, callbackContext);
           } catch (Exception e) {
