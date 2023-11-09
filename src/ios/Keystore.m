@@ -48,10 +48,10 @@
 }
 
 - (void)sign:(CDVInvokedUrlCommand*)command {
-  NSString* alias = [command.arguments objectAtIndex:0];
-  NSString* input = [command.arguments objectAtIndex:1];
-  NSData* data = [input dataUsingEncoding:NSUTF8StringEncoding];
-  NSData* tag = [alias dataUsingEncoding:NSUTF8StringEncoding];
+  NSString* tagString = [command.arguments objectAtIndex:0];
+  NSString* dataString = [command.arguments objectAtIndex:1];
+  NSData* tag = [tagString dataUsingEncoding:NSUTF8StringEncoding];
+  NSData* data = [dataString dataUsingEncoding:NSUTF8StringEncoding];
   NSDictionary *getquery = @{
     (id)kSecClass: (id)kSecClassKey,
     (id)kSecAttrApplicationTag: tag,
@@ -83,6 +83,42 @@
 }
 
 - (void)verify:(CDVInvokedUrlCommand*)command {
+  NSString* tagString = [command.arguments objectAtIndex:0];
+  NSString* messageString = [command.arguments objectAtIndex:1];
+  NSString* signatureString = [command.arguments objectAtIndex:2];
+  NSData* tag = [tagString dataUsingEncoding:NSUTF8StringEncoding];
+  NSData* message = [messageString dataUsingEncoding:NSUTF8StringEncoding];
+  NSData* signature = [signatureString dataUsingEncoding:NSUTF8StringEncoding];
+  NSDictionary *getquery = @{
+    (id)kSecClass: (id)kSecClassKey,
+    (id)kSecAttrApplicationTag: tag,
+    (id)kSecAttrKeyType: (id)kSecAttrKeyTypeRSA,
+    (id)kSecReturnRef: @YES,
+  };
+  SecKeyRef key = NULL;
+  OSStatus status = SecItemCopyMatching((__bridge CFDictionaryRef)getquery, (CFTypeRef *)&key);
+  CDVPluginResult* pluginResult = nil;
+  if (status != errSecSuccess)
+    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Cannot retrieve key"];
+  else {
+    SecKeyRef publicKey = SecKeyCopyPublicKey(key);
+    CFErrorRef error = NULL;
+    SecKeyAlgorithm algorithm = kSecKeyAlgorithmRSASignatureMessagePKCS1v15SHA256;
+    BOOL result = NO;
+    result = SecKeyVerifySignature(publicKey, algorithm, (__bridge CFDataRef)message, (__bridge CFDataRef)signature, &error);
+    if (!result) {
+      NSError *err = CFBridgingRelease(error);
+      if (err) {
+        NSString *message = [NSString stringWithFormat:@"Cannot verify signature: %@", [err localizedDescription]];
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:message];
+      } else
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsInt:0];
+    } else
+      pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsInt:1];
+  }
+  if (key)
+    CFRelease(key);
+  [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
 
 @end
