@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
-        id="vote.directdemocracy.keystore"
-        version="0.7.0">
+<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0" id="vote.directdemocracy.keystore" version="0.7.0">
 
   <name>Keystore</name>
 
@@ -16,36 +14,33 @@
   </js-module>
 
   <platform name="android">
-
     <config-file target="res/xml/config.xml" parent="/*">
       <feature name="Keystore">
         <param name="android-package" value="vote.directdemocracy.plugin.Keystore"/>
       </feature>
     </config-file>
-
     <source-file src="src/android/Keystore.java" target-dir="src/com/example/plugin/"/>
+  </platform>
+
+  <platform name="ios">
+    <config-file target="config.xml" parent="/*">
+      <feature name="Keystore">
+        <param name="ios-package" value="Keystore" />
+      </feature>
+    </config-file>
+    <header-file src="src/ios/Keystore.h" />
+    <source-file src="src/ios/Keystore.m" />
   </platform>
 
   <platform name="browser">
     <config-file target="config.xml" parent="/*">
       <feature name="Keystore">
         <param name="browser-package" value="vote.directdemocracy.plugin.Keystore" />
-      </feature>
+       </feature>
     </config-file>
-
-    <js-module src="src/browser/Keystore.js"
-               name="Keystore">
+    <js-module src="src/browser/Keystore.js" name="Keystore">
       <runs />
     </js-module>
   </platform>
 
-  <platform name="iOS">
-    <config-file target="config.xml" parent="/*">
-      <feature name="Keystore">
-        <param name="iso-package" value="vote.directdemocracy.plugin.Keystore" />
-      </feature>
-    </config-file>
-    <source-file src="src/ios/Keystore.m" />
-    <header-file src="src/ios/Keystore.h" />
-  </platform>
 </plugin>
