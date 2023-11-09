@@ -20,19 +20,18 @@
     pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:message];
   } else {
     SecKeyRef publicKey = SecKeyCopyPublicKey(privateKey);
-    if (!publicKey) {
+    if (!publicKey)
       pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Cannot export public key"];
-    } else {
+    else {
       NSData* keyData = (NSData*)CFBridgingRelease(SecKeyCopyExternalRepresentation(publicKey, &error));
-      if (!keyData) {
+      if (!keyData)
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Failed to export public key"];
-      } else {
+      else {
         NSString *pem = [keyData base64EncodedStringWithOptions:0];
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:pem];
       }
     }
-    // [myString release];
-      CFRelease(privateKey);
+    CFRelease(privateKey);
   }
   [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
