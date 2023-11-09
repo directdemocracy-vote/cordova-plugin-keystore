@@ -72,8 +72,10 @@
       NSError *err = CFBridgingRelease(error);
       NSString *message = [NSString stringWithFormat:@"Cannot sign message: %@", [err localizedDescription]];
       pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:message];
-    } else
-      pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsArrayBuffer:signature];
+    } else {
+      NSString *base64Encoded = [signature base64EncodedStringWithOptions:0];
+      pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:base64Encoded];
+    }
   }
   if (key)
     CFRelease(key);
