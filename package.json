@@ -17,10 +17,7 @@
   "keywords": [
     "cordova",
     "plugin",
-    "keystore",
-    "ecosystem:cordova",
-    "cordova-android",
-    "cordova-ios"
+    "keystore"
   ],
   "author": "Benjamin Deleze",
   "license": "Apache-2",
