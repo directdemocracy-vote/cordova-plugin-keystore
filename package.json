@@ -1,6 +1,6 @@
 {
   "name": "cordova-plugin-keystore",
-  "version": "0.7.0",
+  "version": "1.0.0",
   "description": "A sample for a new cordova plugin",
   "cordova": {
     "id": "cordova-plugin-keystore",
@@ -19,7 +19,7 @@
     "plugin",
     "keystore"
   ],
-  "author": "Benjamin Deleze",
+  "author": "DirectDemocracy",
   "license": "Apache-2",
   "bugs": {
     "url": "https://github.com/directdemocracy-vote/cordova-plugin-keystore/issues"

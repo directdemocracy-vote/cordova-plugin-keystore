@@ -6,6 +6,22 @@
 // Unfortunately we cannot store the key inside the iOS Secure Enclave because it support only
 // storing NIST P-256 elliptic curve keys and we are using RSA 2048 keys.
 
+static SecKeyRef getKey(NSString* alias) {
+  NSData* tag = [alias dataUsingEncoding:NSUTF8StringEncoding];
+  NSDictionary *getquery = @{
+    (id)kSecClass: (id)kSecClassKey,
+    (id)kSecAttrApplicationTag: tag,
+    (id)kSecAttrKeyType: (id)kSecAttrKeyTypeRSA,
+    (id)kSecReturnRef: @YES,
+  };
+  SecKeyRef key = NULL;
+  OSStatus status = SecItemCopyMatching((__bridge CFDictionaryRef)getquery, (CFTypeRef *)&key);
+  if (status != errSecSuccess)
+    return NULL;
+  else
+    return key;
+}
+
 - (void)createKeyPair:(CDVInvokedUrlCommand*)command {
   NSString* alias = [command.arguments objectAtIndex:0];
   NSData* tag = [alias dataUsingEncoding:NSUTF8StringEncoding];
@@ -48,20 +64,12 @@
 }
 
 - (void)sign:(CDVInvokedUrlCommand*)command {
-  NSString* tagString = [command.arguments objectAtIndex:0];
+  NSString* tag = [command.arguments objectAtIndex:0];
   NSString* dataString = [command.arguments objectAtIndex:1];
-  NSData* tag = [tagString dataUsingEncoding:NSUTF8StringEncoding];
   NSData* data = [dataString dataUsingEncoding:NSUTF8StringEncoding];
-  NSDictionary *getquery = @{
-    (id)kSecClass: (id)kSecClassKey,
-    (id)kSecAttrApplicationTag: tag,
-    (id)kSecAttrKeyType: (id)kSecAttrKeyTypeRSA,
-    (id)kSecReturnRef: @YES,
-  };
-  SecKeyRef key = NULL;
-  OSStatus status = SecItemCopyMatching((__bridge CFDictionaryRef)getquery, (CFTypeRef *)&key);
+  SecKeyRef key = getKey(tag);
   CDVPluginResult* pluginResult = nil;
-  if (status != errSecSuccess)
+  if (!key)
     pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Cannot retrieve key"];
   else {
     SecKeyAlgorithm algorithm = kSecKeyAlgorithmRSASignatureMessagePKCS1v15SHA256;
@@ -83,22 +91,14 @@
 }
 
 - (void)verify:(CDVInvokedUrlCommand*)command {
-  NSString* tagString = [command.arguments objectAtIndex:0];
+  NSString* tag = [command.arguments objectAtIndex:0];
   NSString* messageString = [command.arguments objectAtIndex:1];
   NSString* signatureString = [command.arguments objectAtIndex:2];
-  NSData* tag = [tagString dataUsingEncoding:NSUTF8StringEncoding];
   NSData* message = [messageString dataUsingEncoding:NSUTF8StringEncoding];
   NSData* signature = [signatureString dataUsingEncoding:NSUTF8StringEncoding];
-  NSDictionary *getquery = @{
-    (id)kSecClass: (id)kSecClassKey,
-    (id)kSecAttrApplicationTag: tag,
-    (id)kSecAttrKeyType: (id)kSecAttrKeyTypeRSA,
-    (id)kSecReturnRef: @YES,
-  };
-  SecKeyRef key = NULL;
-  OSStatus status = SecItemCopyMatching((__bridge CFDictionaryRef)getquery, (CFTypeRef *)&key);
+  SecKeyRef key = getKey(tag);
   CDVPluginResult* pluginResult = nil;
-  if (status != errSecSuccess)
+  if (!key)
     pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Cannot retrieve key"];
   else {
     SecKeyRef publicKey = SecKeyCopyPublicKey(key);
