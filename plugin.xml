@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- FIXME: rename to cordova-plugin-keystore, change version to 1.0.0 -->
 <plugin xmlns="http://www.phonegap.com/ns/plugins/1.0" id="vote.directdemocracy.keystore" version="0.7.0">
-
   <name>Keystore</name>
-
+  <description>Cordova Keystore Plugin</description>
+  <author>DirectDemocracy</author>
+  <license>Apache 2.0</license>
+  <keywords>cordova,keystore</keywords>
+  <repo>https://github.com/directdemocracy-vote/cordova-plugin-keystore.git</repo>
   <engines>
     <engine name="cordova" version=">=3.4.0"/>
   </engines>
-
+  <!-- FIXME: the following line might be removed -->
   <asset src="www/Keystore.js" target="js/Keystore.js"/>
-
   <js-module src="www/Keystore.js" name="keystore">
     <clobbers target="Keystore" />
   </js-module>
