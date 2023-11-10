@@ -6,6 +6,7 @@
     "id": "cordova-plugin-keystore",
     "platforms": [
       "android",
+      "ios",
       "browser"
     ]
   },
@@ -18,7 +19,8 @@
     "plugin",
     "keystore",
     "ecosystem:cordova",
-    "cordova-android"
+    "cordova-android",
+    "cordova-ios"
   ],
   "author": "Benjamin Deleze",
   "license": "Apache-2",
