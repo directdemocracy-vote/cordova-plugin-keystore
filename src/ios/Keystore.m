@@ -54,7 +54,7 @@ static SecKeyRef getKey(NSString* alias) {
       if (!keyData)
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Failed to export public key"];
       else {
-        NSString *pem = [keyData base64EncodedStringWithOptions:0];
+        NSString *pem = [NSString stringWithFormat:@"MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8A%@", [keyData base64EncodedStringWithOptions:0]];
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:pem];
       }
     }
